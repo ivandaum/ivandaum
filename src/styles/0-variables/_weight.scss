@@ -1,0 +1,7 @@
+$weight: (
+	regular: 400,
+);
+
+@function weight($key) {
+	@return get-array-value($weight, $key, map-get($weight, regular));
+}

@@ -1,0 +1,38 @@
+$spacings: (
+    'margin': 'm',
+    'padding': 'p',
+);
+
+$directions: (
+    'top': 't',
+    'right': 'r',
+    'bottom': 'b',
+    'left': 'l',
+);
+
+@each $property, $shortcut in $spacings {
+    // example : m-0 ==> margin: 0px;
+    @for $i from 0 to 9 {
+        $value: #{$i}rem;
+
+        .#{$shortcut}-#{$i} {
+            #{$property}: $value;
+            @include responsive-property-value($property, $value);
+        }
+
+        @each $direction, $suffix in $directions {
+            // example : mt-0 ==> margin-top: 0px;
+            .#{$shortcut}#{$suffix}-#{$i} {
+                #{$property}-#{$direction}: $value;
+                @include responsive-property-value(#{$property}-#{$direction}, $value);
+            }
+        }
+    }
+}
+
+// is-left-0, is-bottom-0 for is-absolute support purpose
+@each $direction, $suffix in $directions {
+    .is-#{$direction}-0 {
+        #{$direction}: 0;
+    }
+}

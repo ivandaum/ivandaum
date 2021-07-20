@@ -1,0 +1,12 @@
+.container {
+    @include desktop {
+        height: vh(100);
+        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    > div {
+        padding: var(--gap);
+    }
+}

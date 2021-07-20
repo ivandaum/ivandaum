@@ -1,0 +1,13 @@
+/*
+* SPECIFIC BREAKPOINTS
+*/
+.About__bio {
+  max-width: 44rem;
+}
+.About__bio a {
+    border-color: #fff;
+}
+.About__bio p {
+    margin-bottom: 1em;
+}
+

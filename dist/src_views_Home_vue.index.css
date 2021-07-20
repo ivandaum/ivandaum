@@ -1,0 +1,35 @@
+/*
+* SPECIFIC BREAKPOINTS
+*/
+.Home__subtitle {
+  opacity: 0.5;
+}
+.Home__separator {
+  font-size: 1.2rem;
+  margin: 0 0.8rem;
+}
+@media all and (min-width: 1024px) {
+.Home__bottom {
+    position: absolute;
+    bottom: 0;
+}
+}
+.Home__picture {
+  right: 0;
+  bottom: 0;
+}
+@media all and (min-width: 1024px) {
+.Home__newtorks {
+    text-align: right;
+}
+}
+.Home a p {
+  background: #fff;
+  color: #111;
+  right: 100%;
+  white-space: nowrap;
+  transform: translate(-1rem, -1rem);
+  font-size: 1.2rem;
+  padding: 0 0.5rem;
+}
+

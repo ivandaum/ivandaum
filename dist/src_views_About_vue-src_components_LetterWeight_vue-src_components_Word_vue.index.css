@@ -1,0 +1,17 @@
+.LetterWeight {
+  transform-origin: center center;
+}
+
+/*
+* SPECIFIC BREAKPOINTS
+*/
+.Word {
+  transform-origin: left center;
+  font-size: 5vw;
+  font-weight: 500;
+}
+
+/*
+* SPECIFIC BREAKPOINTS
+*/
+

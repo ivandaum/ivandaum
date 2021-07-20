@@ -1,0 +1,10 @@
+:root {
+	--vh: 1vh;
+    --gap: 10rem;
+}
+
+@include touch {
+    :root {
+        --gap: 2rem;
+    }
+}

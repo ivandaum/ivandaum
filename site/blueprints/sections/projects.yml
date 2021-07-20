@@ -1,0 +1,5 @@
+title: Projets
+type: pages
+headline: Projets
+query: site.find('projects')
+template: project
