@@ -1,122 +1,210 @@
 <template>
-    <div class="Home container">
-        <div class="is-flex is-justified is-left-y">
-            <p>Ivan Daum<br />Freelance developer<br />in Paris, France</p>
-            <router-link to="/about">About</router-link>
-        </div>
-
-        <div class="w-100 is-flex is-justified is-right-y is-relative">
-            <ul>
-                <li v-for="(project, i) in projects" :key="i">
-                    <a
-                        :href="project.url"
-                        target="_blank"
-                        class="is-inline-flex is-center-y"
-                    >
-                        {{ project.title }}
-                        <span class="Home__separator">/</span>
-                        <span class="Home__subtitle">{{ project.type }}</span>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="Home__picture is-absolute">
-                <div
-                    class="is-absolute"
-                    v-for="(project, i) in projects"
-                    :key="'cover' + i"
-                    v-html="project.coverHtml"
-                />
-            </div>
-
-            <ul class="Home__newtorks">
-                <li>
-                    <a
-                        class="is-relative"
-                        @mouseleave="onEmailLeave"
-                        @mouseenter="onEmailEnter"
-                        @click="onEmailClick"
-                    >
-                        <p class="is-absolute" v-html="emailMessage" />
-                        Email
-                    </a>
-                </li>
-                <li v-for="(network, a) in socialNetworks" :key="'network' + a">
-                    <a target="_blank" :href="network.url">
-                        {{ network.name }}
-                    </a>
-                </li>
-            </ul>
-        </div>
+  <div class="Index" @mousemove="onMouseMove">
+    <div
+      class="
+        Ruler
+        is-column
+        is-12
+        is-12-touch
+        is-fixed
+        is-flex
+        is-padding-left-2
+        is-padding-right-2
+      "
+    >
+      <div
+        class="is-relative is-column is-1 is-1-touch"
+        :key="i"
+        v-for="i in 12"
+      ></div>
     </div>
+
+    <Konami />
+
+    <p
+      class="Label is-fixed"
+      ref="label"
+      v-html="$store.state.string"
+      v-show="$store.state.visible"
+      :style="{ transform: `translate3d(${cursor[0]}px,${cursor[1]}px, 0)` }"
+    />
+
+    <div class="Index__content js-view is-padding-left-2 is-padding-right-2">
+      <Introduction :contact="contact" />
+      <Projects :work="work" />
+      <About :bio="bio" />
+
+      <Footer :contact="contact" />
+      <!-- <canvas class="Index__canvas is-absolute" @mousedown="$el.classList.add('is-focused')" @mouseup="$el.classList.remove('is-focused')" /> -->
+    </div>
+  </div>
 </template>
+
 <script>
-import { copyToClipboard } from "~/scripts/functions";
+import Introduction from "~/components/Introduction.vue";
+import About from "~/components/About.vue";
+import Projects from "~/components/Projects.vue";
+import Footer from "~/components/Footer.vue";
+import Konami from "~/components/Konami.vue";
+import { copyToClipboard } from "~/scripts/helpers/dom.js";
+// import RainbowMaker from '~/scripts/fun/RainbowMaker.js'
 
 export default {
-    name: "Home",
-    data() {
-        return {
-            projects: window.projects,
-            socialNetworks: about.socialNetworks,
-            emailMessage: "",
-        };
+  components: {
+    Introduction,
+    About,
+    Projects,
+    Footer,
+    Konami,
+  },
+  data() {
+    return {
+      cursor: [],
+      contact: [],
+      work: window.projects,
+      bio: window.about.bio,
+      contact: window.about.contact,
+    };
+  },
+
+  mounted() {
+    const mailto = document.querySelectorAll('a[href*="mailto:"]');
+    mailto.forEach((link) => this.toClipboard(link));
+
+    const scrollto = document.querySelectorAll('a[href*="#"]');
+    scrollto.forEach((link) => this.scrollTo(link));
+
+    // this.RainbowMaker = new RainbowMaker({ canvas: this.$el.querySelector('canvas') })
+
+    this.RafManager.addQueue(() => this.ScrollManager.onScroll());
+    // this.RafManager.addQueue(() => this.RainbowMaker.render())
+
+    // setTimeout(() => this.toggleRainbow(), 50)
+  },
+
+  methods: {
+    scrollTo(link) {
+      link.addEventListener("click", (e) => {
+        this.$store.commit("hideLabel");
+        const $el = this.$el.querySelector("#" + link.href.split("#")[1]);
+        if ($el) {
+          e.preventDefault();
+          let y = this.ScrollManager.scroll + $el.getBoundingClientRect().top;
+
+          if (y + window.innerHeight > this.$el.offsetHeight) {
+            y = this.$el.offsetHeight - window.innerHeight;
+          }
+
+          this.ScrollManager.scrollTo({ y });
+        }
+      });
     },
 
-    methods: {
-        onEmailLeave() {
-            this.emailMessage = "";
-        },
-        onEmailEnter() {
-            this.emailMessage = "Copy to clipboard ?";
-        },
-        onEmailClick() {
-            copyToClipboard(window.about.email);
-            this.emailMessage = "Copied !";
-        },
+    toClipboard(link) {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        copyToClipboard(link.href.replace("mailto:", ""));
+        this.$store.commit("showLabel", {
+          string: "It's in your clipboard now!",
+        });
+      });
     },
+
+    onMouseMove(e) {
+      this.cursor = [e.clientX + 10, e.clientY + 10];
+    },
+  },
 };
 </script>
+
 <style lang="scss">
-@import "~/styles/0-variables/";
-@import "~/styles/0-framework/";
+@import "~/styles/_base";
 
-.Home {
-    &__subtitle {
-        opacity: 0.5;
-    }
-
-    &__separator {
-        font-size: 1.2rem;
-        margin: 0 0.8rem;
-    }
-
-    &__bottom {
-        @include desktop {
-            position: absolute;
-            bottom: 0;
-        }
-    }
-
-    &__picture {
-        right: 0;
-        bottom: 0;
-    }
-
-    &__newtorks {
-        @include desktop {
-            text-align: right;
-        }
-    }
-
-    a p {
-        background: color("white");
-        color: color("black");
-        right: 100%;
-        white-space: nowrap;
-        transform: translate(-1rem, -1rem);
-        font-size: 1.2rem;
-        padding: 0 0.5rem;
-    }
+.Label {
+  color: var(--color-background);
+  background-color: var(--color-text);
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1em;
+  padding: 0.25em;
+  text-transform: lowercase;
+  z-index: map-get($zindex, above-all);
 }
+
+.Ruler {
+  z-index: map-get($zindex, above-all);
+  pointer-events: none;
+  opacity: 0.1;
+  display: none;
+
+  > div::before {
+    content: "";
+    border-left: 0.1rem solid var(--color-text);
+    height: 100vh;
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+  }
+
+  > div:last-of-type::before {
+    border-right: 0.1rem solid var(--color-text);
+  }
+}
+
+// .RainbowBtn {
+//     z-index: map-get($zindex, above-section);
+
+//     &--trigger {
+//         overflow: hidden;
+//         display: inline-block;
+//         height: 1.25em;
+//         color: var(--color-text);
+//         padding: 0;
+
+//         p {
+//             transition: transform var(--speed) var(--easing);
+//             line-height: 1em;
+//         }
+
+//         p:last-of-type {
+//             left: 0;
+//             transform: translate3d(0, 1.25em, 0);
+//         }
+//     }
+// }
+
+// .js-rainbowed {
+//     transition: opacity var(--speed) var(--easing);
+// }
+
+// body.rainbow-everywhere {
+//     .js-rainbowed {
+//         opacity: 0;
+//         pointer-events: none;
+//         z-index: map-get($zindex, base);
+//     }
+
+//     .Index {
+//         cursor: grab !important;
+//     }
+
+//     .Index.is-focused {
+//         cursor: grabbing !important;
+//     }
+
+//     .RainbowBtn {
+//         p:first-of-type {
+//             transform: translate3d(0, -1.5em, 0) rotate(5deg);
+//         }
+
+//         p:last-of-type {
+//             transform: translate3d(0, 0.1em, 0) rotate(-5deg);
+//         }
+//     }
+
+//     .Index__canvas {
+//         display: block;
+//     }
+// }
 </style>

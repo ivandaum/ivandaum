@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "./src/core/.eslintrc",
+    "plugin:vue/base"
+  ]
+}

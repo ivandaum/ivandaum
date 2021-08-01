@@ -1,38 +1,38 @@
 <template>
-    <div class="App has-width-100">
-        <div class="has-width-100 is-relative">
-            <router-view />
-        </div>
-    </div>
+  <div class="App">
+    <router-view />
+  </div>
 </template>
 <script>
-// import { getMousePosition } from "~/scripts/functions";
+import "~/plugins/raf-manager.js";
+import "~/plugins/scroll-manager.js";
 
 export default {
-    components: {
-        // Nav,
+  mounted() {
+    const style = "background:black; padding:5px; color:white;";
+    console.log("%cThis portfolio was made with Vue", style);
+    console.log("%cFind the source on github :", style);
+    console.log("%chttps://github.com/ivandaum/ivandaum", style);
+
+    this.calcVh();
+
+    window.addEventListener("resize", () => {
+      this.calcVh();
+    });
+
+    setTimeout(() => this.$el.classList.add("loaded"), 500);
+  },
+  methods: {
+    calcVh() {
+      const vh = window.innerHeight * 0.01;
+      // Then we set the value in the --vh custom property to the root of the document
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
     },
-    created() {
-        // this.$store.commit("onResize", () => this.onResize());
-        // window.addEventListener("mousemove", (e) => this.onMouseMove(e));
-    },
-    methods: {
-        // onResize() {
-        //     const windowWidth = window.innerWidth;
-        //     const windowHeight = window.innerHeight;
-        //     this.$store.commit("set", { windowWidth, windowHeight });
-        // },
-        // onMouseMove(e) {
-        //     const mouse = getMousePosition(e);
-        //     this.$store.commit("set", { mouse });
-        // },
-    },
+  },
 };
 </script>
-<style lang="scss">
-@import "~/styles/main.scss";
 
-.App {
-    height: vh(100);
-}
+
+<style lang="scss">
+@import "~/styles";
 </style>

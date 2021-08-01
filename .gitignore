@@ -23,6 +23,8 @@ Icon
 /src/fonts
 content
 media
+
+src/core
 # -------------SECURITY-------------
 # NEVER publish these files via Git!
 # -------------SECURITY-------------
@@ -50,5 +52,5 @@ media
 /site/config/.license
 node_modules
 dist/index*
-
+dist/
 site/config/

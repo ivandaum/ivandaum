@@ -2,20 +2,18 @@
 
 return function ($page, $site) {
     $content = $site->content();
-    $social = array();
+    $contact = array();
 
     foreach($content->social()->toStructure() as $link) {
-        $social[] = array(
-        'name' => $link->name()->toString(),
-        'url' => $link->url()->toString()
-        );
+        $contact[strtolower($link->name()->toString())] = $link->url()->toString();
     }
+
+    $contact['email'] = 'mailto:' . $content->email()->toString();
 
     $about = array(
         'bio' => $content->about()->toString(),
         'clients' => $content->clients()->split(),
-        'email' => $content->email()->toString(),
-        'socialNetworks' => $social
+        'contact' => $contact
     );
 
     $projects = array();

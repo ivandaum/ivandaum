@@ -1,35 +1,277 @@
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Introduction.vue?vue&type=style&index=0&lang=scss& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
 /*
 * SPECIFIC BREAKPOINTS
 */
-.Home__subtitle {
-  opacity: 0.5;
+/*
+* DEVICE BREAKPOINTS
+*/
+:root {
+  --color-text: #000;
+  --color-textLight: #959595;
+  --color-background: #fefefe;
+  --easing: cubic-bezier(0.59, 0.01, 0.4, 0.98);
+  --speed: 400ms;
+  --size: 1.6rem;
+  --padding: 3rem;
+  --font-family: 'Inter', Helvetica, Arial, sans-serif;
+  --vh: 1vh;
 }
-.Home__separator {
-  font-size: 1.2rem;
-  margin: 0 0.8rem;
+@media all and (max-width: 1023px) {
+:root {
+    --padding: 1.5rem;
+    --size: 1rem;
+}
+}
+@media (prefers-color-scheme: dark) {
+:root {
+    --color-text: #e0dfdf;
+    --color-background: #202224;
+}
+}
+.Introduction {
+  margin-bottom: calc(var(--padding) * 10);
 }
 @media all and (min-width: 1024px) {
-.Home__bottom {
+.Introduction {
+      min-height: 100vh;
+      margin-bottom: calc(var(--padding) * -4);
+}
+}
+
+/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/About.vue?vue&type=style&index=0&lang=scss& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************/
+.About p {
+  margin-bottom: 2rem;
+}
+.About p a {
+    text-decoration: underline;
+}
+
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Projects.vue?vue&type=style&index=0&lang=scss& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+/*
+* SPECIFIC BREAKPOINTS
+*/
+/*
+* DEVICE BREAKPOINTS
+*/
+:root {
+  --color-text: #000;
+  --color-textLight: #959595;
+  --color-background: #fefefe;
+  --easing: cubic-bezier(0.59, 0.01, 0.4, 0.98);
+  --speed: 400ms;
+  --size: 1.6rem;
+  --padding: 3rem;
+  --font-family: 'Inter', Helvetica, Arial, sans-serif;
+  --vh: 1vh;
+}
+@media all and (max-width: 1023px) {
+:root {
+    --padding: 1.5rem;
+    --size: 1rem;
+}
+}
+@media (prefers-color-scheme: dark) {
+:root {
+    --color-text: #e0dfdf;
+    --color-background: #202224;
+}
+}
+.Projects {
+  transform: translate3d(0, var(--padding), 0);
+  transition: transform var(--speed) var(--easing), opacity var(--speed) var(--easing);
+}
+.Project--picture {
+  padding-top: 100%;
+  overflow: hidden;
+}
+.Project--picture picture {
+    top: 0;
     position: absolute;
-    bottom: 0;
+    left: 0;
+}
+.Project--picture img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.Project--title {
+  margin-bottom: calc(var(--padding) * 0.5);
+}
+a:hover .Project--title span {
+  border-bottom: 0.1rem solid var(--color-text);
+}
+@media all and (min-width: 768px) {
+.Project:nth-of-type(even) {
+    transform: translateY(calc(var(--padding) * 10));
 }
 }
-.Home__picture {
-  right: 0;
+#app.loaded .Projects {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Footer.vue?vue&type=style&index=0&lang=scss& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/*
+* SPECIFIC BREAKPOINTS
+*/
+/*
+* DEVICE BREAKPOINTS
+*/
+:root {
+  --color-text: #000;
+  --color-textLight: #959595;
+  --color-background: #fefefe;
+  --easing: cubic-bezier(0.59, 0.01, 0.4, 0.98);
+  --speed: 400ms;
+  --size: 1.6rem;
+  --padding: 3rem;
+  --font-family: 'Inter', Helvetica, Arial, sans-serif;
+  --vh: 1vh;
+}
+@media all and (max-width: 1023px) {
+:root {
+    --padding: 1.5rem;
+    --size: 1rem;
+}
+}
+@media (prefers-color-scheme: dark) {
+:root {
+    --color-text: #e0dfdf;
+    --color-background: #202224;
+}
+}
+@media all and (max-width: 1023px) {
+.Footer {
+    font-size: calc(var(--size) * 1.3);
+}
+}
+.Footer__contact li::after {
+  content: ", ";
+  margin-right: 0.25em;
+}
+.Footer__contact li:last-of-type::after {
+  display: none;
+}
+
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Konami.vue?vue&type=style&index=0&lang=scss& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/*
+* SPECIFIC BREAKPOINTS
+*/
+/*
+* DEVICE BREAKPOINTS
+*/
+:root {
+  --color-text: #000;
+  --color-textLight: #959595;
+  --color-background: #fefefe;
+  --easing: cubic-bezier(0.59, 0.01, 0.4, 0.98);
+  --speed: 400ms;
+  --size: 1.6rem;
+  --padding: 3rem;
+  --font-family: 'Inter', Helvetica, Arial, sans-serif;
+  --vh: 1vh;
+}
+@media all and (max-width: 1023px) {
+:root {
+    --padding: 1.5rem;
+    --size: 1rem;
+}
+}
+@media (prefers-color-scheme: dark) {
+:root {
+    --color-text: #e0dfdf;
+    --color-background: #202224;
+}
+}
+.Konami {
+  z-index: 99;
   bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 15vw;
+  max-height: 25vh;
+  transform-origin: center center;
 }
-@media all and (min-width: 1024px) {
-.Home__newtorks {
-    text-align: right;
+.konami-slide-enter-active,
+.konami-slide-leave-active {
+  transition: transform 0.6s;
+}
+.konami-slide-enter,
+.konami-slide-leave-to {
+  transform: translate3d(0, 100%, 0);
+}
+
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/Home.vue?vue&type=style&index=0&lang=scss& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
+/*
+* SPECIFIC BREAKPOINTS
+*/
+/*
+* DEVICE BREAKPOINTS
+*/
+:root {
+  --color-text: #000;
+  --color-textLight: #959595;
+  --color-background: #fefefe;
+  --easing: cubic-bezier(0.59, 0.01, 0.4, 0.98);
+  --speed: 400ms;
+  --size: 1.6rem;
+  --padding: 3rem;
+  --font-family: 'Inter', Helvetica, Arial, sans-serif;
+  --vh: 1vh;
+}
+@media all and (max-width: 1023px) {
+:root {
+    --padding: 1.5rem;
+    --size: 1rem;
 }
 }
-.Home a p {
-  background: #fff;
-  color: #111;
-  right: 100%;
-  white-space: nowrap;
-  transform: translate(-1rem, -1rem);
-  font-size: 1.2rem;
-  padding: 0 0.5rem;
+@media (prefers-color-scheme: dark) {
+:root {
+    --color-text: #e0dfdf;
+    --color-background: #202224;
+}
+}
+.Label {
+  color: var(--color-background);
+  background-color: var(--color-text);
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1em;
+  padding: 0.25em;
+  text-transform: lowercase;
+  z-index: 99;
+}
+.Ruler {
+  z-index: 99;
+  pointer-events: none;
+  opacity: 0.1;
+  display: none;
+}
+.Ruler > div::before {
+    content: "";
+    border-left: 0.1rem solid var(--color-text);
+    height: 100vh;
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+}
+.Ruler > div:last-of-type::before {
+    border-right: 0.1rem solid var(--color-text);
 }
 

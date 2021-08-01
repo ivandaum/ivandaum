@@ -1,24 +1,27 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import '~/plugins/RafManager'
-
-Vue.use(Vuex)
+import Vue from 'vue';
+import Vuex from 'vuex';
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        windowWidth: 0,
-        windowHeight: 0,
-        mouse: [0, 0]
+  state: {
+    visible: false,
+    string: ''
+  },
+  mutations: {
+    hideLabel(state) {
+      state.string = '';
+      state.visible = false;
     },
-    mutations: {
-        set(state, attrs) {
-            for (let name in attrs) {
-                state[name] = attrs[name]
-            }
-        },
-        onResize(state, callback) {
-            callback()
-            window.addEventListener('resize', () => callback())
-        },
+
+    showLabel(state, { string }) {
+      state.visible = true;
+      state.string = string;
     },
-})
+
+    hideLabelDelayed(state) {
+      setTimeout(() => {
+        state.visible = false;
+      }, 2000);
+    }
+  },
+});

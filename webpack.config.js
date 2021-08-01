@@ -1,9 +1,11 @@
-const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require('path');
+const merge = require('./src/core/webpack/merge');
+const vue = require('./src/core/webpack/webpack.vue');
+const url = require('./src/core/webpack/webpack.url');
+const es6 = require('./src/core/webpack/webpack.es6');
 
-module.exports = {
-  mode: 'development',
+const base = {
+  mode: 'none',
   entry: path.resolve(__dirname, './src/index.js'),
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -14,48 +16,7 @@ module.exports = {
       '~': path.resolve(__dirname, './src'),
     },
   },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        use: 'vue-loader',
-      },
-      {
-        test: /\.(png|jpg|jpeg|webp)$/,
-        use: 'url-loader',
-      },
-      {
-        test: /\.js$/,
-        use: 'babel-loader',
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '',
-            },
-          },
-          'css-loader',
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'url-loader',
-      },
-      {
-        test: /\.(vert|frag)$/i,
-        use: ['raw-loader', 'glslify-loader'],
-      },
-    ],
-  },
-  plugins: [
-    new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'index.css',
-    }),
-  ],
-}
+};
+
+const config = merge(base, [vue, url, es6]);
+module.exports = config;
