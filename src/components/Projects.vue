@@ -113,6 +113,9 @@ export default {
       top: 0;
       position: absolute;
       left: 0;
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
     }
   }
 

@@ -15,6 +15,16 @@
         var about = <?= $about ?>;
         var projects = <?= $projects ?>;
     </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47064352-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-47064352-3');
+    </script>
+
 </head>
 <body>
     <div id="app"></div>
