@@ -1,6 +1,6 @@
 Hi 👋
 
-I'm a freelance interactive developer in Paris, France
+I'm an interactive developer in Paris, France
 
 Making internet things since 2014
 
